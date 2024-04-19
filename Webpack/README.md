@@ -79,3 +79,6 @@ Webpack is a powerful and popular JavaScript bundler used to compile modules and
 - When running the dev server, your code should work on `http://localhost:8564/`.
 - When running Webpack, your JavaScript and HTML files should be generated in a `public` folder.
 - Opening your main file should not generate any error in the console.
+
+## Author ✒️
+- [Mouayed sabbagh](https://github.com/MOUAYEDSB)
