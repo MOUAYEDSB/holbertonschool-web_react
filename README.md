@@ -7,3 +7,5 @@
 - [Webpack](https://github.com/MOUAYEDSB/holbertonschool-web_react/tree/main/Webpack)
 
 - [react_intro](https://github.com/MOUAYEDSB/holbertonschool-web_react/tree/main/react_intro)
+
+- [react_props](https://github.com/MOUAYEDSB/holbertonschool-web_react/tree/main/react_props)
