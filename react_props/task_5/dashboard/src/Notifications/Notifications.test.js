@@ -4,24 +4,33 @@ import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 
 describe('Notifications', () => {
-    it('renders without crashing', () => {
-        const wrapper = shallow(<Notifications />);
-        expect(wrapper.exists()).toBe(true);
+    it('menu item is displayed when displayDrawer is false', () => {
+        const wrapper = shallow(<Notifications displayDrawer={false} listNotifications={[]} />);
+        expect(wrapper.find('.menuItem').text()).toEqual('Your notifications');
+        expect(wrapper.exists('.Notifications')).toBe(false);
     });
 
-    it('renders NotificationItem components', () => {
-        const wrapper = shallow(<Notifications />);
-        expect(wrapper.find(NotificationItem).length).toBe(3);
+    it('div.Notifications is not displayed when displayDrawer is false', () => {
+        const wrapper = shallow(<Notifications displayDrawer={false} />);
+        expect(wrapper.exists('.Notifications')).toBe(false);
     });
 
-    it('renders the text "Here is the list of notifications"', () => {
-        const wrapper = shallow(<Notifications />);
-        expect(wrapper.text()).toContain('Here is the list of notifications');
+    it('menu item is being displayed when displayDrawer is true', () => {
+        const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={[]} />);
+        expect(wrapper.find('.menuItem').text()).toEqual('Your notifications');
+        expect(wrapper.exists('.Notifications')).toBe(true);
     });
 
-    it('the first NotificationItem renders the right html', () => {
-        const wrapper = shallow(<Notifications />);
-        expect(wrapper.find(NotificationItem).at(0).prop('type')).toEqual('default');
-        expect(wrapper.find(NotificationItem).at(0).prop('value')).toEqual('New course available');
+    describe('with a list of notifications and displayDrawer true', () => {
+        const notifications = [
+            { id: 1, type: 'default', value: 'New course available' },
+            { id: 2, type: 'urgent', value: 'New resume available' },
+            { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
+        ];
+
+        it('renders the correct number of notifications', () => {
+            const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={notifications} />);
+            expect(wrapper.find(NotificationItem).length).toBe(notifications.length);
+        });
     });
 });

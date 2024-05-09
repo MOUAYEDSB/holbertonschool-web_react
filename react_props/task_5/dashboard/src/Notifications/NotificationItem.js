@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function NotificationItem({ type, html, value }) {
+function NotificationItem({ type = 'default', html, value }) {
   const liProps = {
     "data-priority": type
   };
@@ -18,7 +18,7 @@ function NotificationItem({ type, html, value }) {
 }
 
 NotificationItem.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   html: PropTypes.shape({ __html: PropTypes.string }),
   value: PropTypes.string
 };

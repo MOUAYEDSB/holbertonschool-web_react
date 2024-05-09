@@ -1,41 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { shallow } from 'enzyme';
+import CourseListRow from './CourseListRow';
 
-function CourseListRow({ isHeader, textFirstCell, textSecondCell = null}) {
-  if (isHeader) {
-    if (textSecondCell === null) {
-      return (
-        <tr>
-          <th colSpan="2">{textFirstCell}</th>
-        </tr>
-      );
-    } else {
-      return (
-        <tr>
-          <th>{textFirstCell}</th>
-          <th>{textSecondCell}</th>
-        </tr>
-      );
-    }
-  } else {
-    return (
-      <tr>
-        <td>{textFirstCell}</td>
-        <td>{textSecondCell}</td>
-      </tr>
-    );
-  }
-}
+describe('CourseListRow', () => {
+  it('renders one cell with colspan=2 when isHeader is true and textSecondCell is null', () => {
+    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Test" />);
+    expect(wrapper.find('th').prop('colSpan')).toBe('2');
+  });
 
-CourseListRow.propTypes = {
-  isHeader: PropTypes.bool,
-  textFirstCell: PropTypes.string.isRequired,
-  textSecondCell: PropTypes.string,
-};
+  it('renders two cells when isHeader is true and textSecondCell is present', () => {
+    const wrapper = shallow(<CourseListRow isHeader={true} textFirstCell="Test" textSecondCell="Second" />);
+    expect(wrapper.find('th').length).toBe(2);
+  });
 
-CourseListRow.defaultProps = {
-  isHeader: false,
-  textSecondCell: null,
-};
-
-export default CourseListRow;
+  it('renders correctly two td elements within a tr element when isHeader is false', () => {
+    const wrapper = shallow(<CourseListRow isHeader={false} textFirstCell="Test" textSecondCell="Second" />);
+    expect(wrapper.find('td').length).toBe(2);
+  });
+});
