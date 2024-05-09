@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "jquery": "^3.7.1"
+  },
+  "devDependencies": {
+    "babel-loader": "^9.1.3"
   }
 }
