@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-function NotificationItem({ type = 'default', html, value }) {
-  const liProps = {
-    "data-priority": type
-  };
+class NotificationItem extends PureComponent {
+  render() {
+    const { type = 'default', html, value } = this.props;
+    const liProps = {
+      "data-priority": type
+    };
 
-  if (html) {
-    liProps.dangerouslySetInnerHTML = html;
-  } else {
-    liProps.children = value;
+    if (html) {
+      liProps.dangerouslySetInnerHTML = html;
+    } else {
+      liProps.children = value;
+    }
+
+    return (
+      <li {...liProps} />
+    );
   }
-
-  return (
-    <li {...liProps} />
-  );
 }
 
 NotificationItem.propTypes = {
