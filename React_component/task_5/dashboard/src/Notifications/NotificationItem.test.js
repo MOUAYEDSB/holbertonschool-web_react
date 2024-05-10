@@ -1,21 +1,28 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 
-describe('NotificationItem', () => {
+describe('Notifications', () => {
   it('renders without crashing', () => {
-    shallow(<NotificationItem type="default" value="test" />);
+    shallow(<Notifications />);
   });
 
-  it('renders correct html for type and value', () => {
-    const wrapper = shallow(<NotificationItem type="default" value="test" />);
-    expect(wrapper.find('li').prop('data-priority')).toEqual('default');  // Corrigido para data-priority
-    expect(wrapper.text()).toEqual('test');
+  it('does not rerender with the same list', () => {
+    const wrapper = shallow(<Notifications listNotifications={[{ id: 1, type: 'default', value: 'test' }]} />);
+    const instance = wrapper.instance();
+    const shouldUpdateSpy = jest.spyOn(instance, 'shouldComponentUpdate');
+    wrapper.setProps({ listNotifications: [{ id: 1, type: 'default', value: 'test' }] });
+    expect(shouldUpdateSpy).toHaveBeenCalled();
+    expect(shouldUpdateSpy).toHaveLastReturnedWith(false);
   });
 
-  it('renders correct html with dangerouslySetInnerHTML', () => {
-    const htmlContent = { __html: '<u>test</u>' };
-    const wrapper = shallow(<NotificationItem html={htmlContent} type="default" />);
-    expect(wrapper.html()).toContain('<u>test</u>');
+  it('rerenders with a longer list', () => {
+    const wrapper = shallow(<Notifications listNotifications={[{ id: 1, type: 'default', value: 'test' }]} />);
+    const instance = wrapper.instance();
+    const shouldUpdateSpy = jest.spyOn(instance, 'shouldComponentUpdate');
+    wrapper.setProps({ listNotifications: [{ id: 1, type: 'default', value: 'test' }, { id: 2, type: 'urgent', value: 'urgent test' }] });
+    expect(shouldUpdateSpy).toHaveBeenCalled();
+    expect(shouldUpdateSpy).toHaveLastReturnedWith(true);
   });
 });
