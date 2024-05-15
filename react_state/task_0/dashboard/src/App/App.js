@@ -23,12 +23,13 @@ class App extends Component {
         { id: 2, type: 'urgent', value: 'New resume available' },
         { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
       ],
-      displayDrawer: false // Default state for displayDrawer
+      displayDrawer: false,
     };
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    
   }
 
   componentDidMount() {
@@ -46,13 +47,10 @@ class App extends Component {
       this.props.logOut();
     }
   }
-
-  // Function to handle displaying the drawer
   handleDisplayDrawer() {
     this.setState({ displayDrawer: true });
   }
 
-  // Function to handle hiding the drawer
   handleHideDrawer() {
     this.setState({ displayDrawer: false });
   }
@@ -60,17 +58,18 @@ class App extends Component {
   render() {
     const { isLoggedIn } = this.props;
     const { listCourses, listNotifications, displayDrawer } = this.state;
+    const appStyle = displayDrawer ? styles.appHidden : styles.app;
 
     return (
       <>
-        <div className={css(styles.app)}>
-          <Notifications
-            listNotifications={listNotifications}
-            displayDrawer={displayDrawer} // Pass displayDrawer state to Notifications
-            handleDisplayDrawer={this.handleDisplayDrawer} // Pass handleDisplayDrawer function
-            handleHideDrawer={this.handleHideDrawer} // Pass handleHideDrawer function
-          />
-          <Header />
+        <div className={css(appStyle)}>
+        <Notifications 
+          listNotifications={listNotifications} 
+          displayDrawer={displayDrawer} 
+          handleDisplayDrawer={this.handleDisplayDrawer} 
+          handleHideDrawer={this.handleHideDrawer} 
+        />
+        <Header />
           <div className={css(styles.appBody)}>
             {isLoggedIn ? (
               <BodySectionWithMarginBottom title="Course list">
@@ -94,12 +93,12 @@ class App extends Component {
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
-  logOut: PropTypes.func
+  logOut: PropTypes.func,
 };
 
 App.defaultProps = {
   isLoggedIn: false,
-  logOut: () => {}
+  logOut: () => {},
 };
 
 const styles = StyleSheet.create({
@@ -107,6 +106,12 @@ const styles = StyleSheet.create({
     margin: 0,
     padding: 0,
     boxSizing: 'border-box',
+  },
+  appHidden: {
+    display: 'none',
+    '@media (min-width: 769px)': {
+      display: 'block',
+    },
   },
   appBody: {
     margin: '30px',
