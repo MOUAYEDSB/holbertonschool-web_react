@@ -1,6 +1,6 @@
 # React Redux Action Creator + Normalizr
 
-<img src='image/readme.png' title='redme'>
+<img src='image/readme.jpg' title='redme'>
 
 
 ## Overview
@@ -45,4 +45,3 @@ This project integrates Normalizr and Redux action creators within a React appli
 
 ### Author
  [Mouayed sabbagh](https://github.com/MOUAYEDSB)
- 
