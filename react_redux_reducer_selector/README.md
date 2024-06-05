@@ -1,7 +1,7 @@
 # React Redux Reducer and Selector Project
 
 
-<img src="image/readme.jpg"  title="Optional title">
+<img src="image/readme.jpg"  title="Optional title" >
 
 
 ## Introduction
@@ -18,4 +18,3 @@ This project demonstrates the use of React with Redux to manage state effectivel
 
 ## Author ✒️
 - [Mouayed sabbagh](https://github.com/MOUAYEDSB)
-
