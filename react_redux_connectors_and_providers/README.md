@@ -107,3 +107,6 @@ Adjust the test suite to verify the behavior of memoized selectors.
 
 ### 29. Container/Component
 Separate concerns by organizing your components into containers and presentational components.
+
+## Author ✒️
+- [Mouayed sabbagh](https://github.com/MOUAYEDSB)
