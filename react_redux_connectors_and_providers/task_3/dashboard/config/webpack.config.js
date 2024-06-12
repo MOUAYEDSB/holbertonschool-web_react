@@ -17,9 +17,13 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         use: [
-          'file-loader',
           {
-            loader: 'image-webpack-loader',
+            loader: 'url-loader',
+            options: {
+              limit: 8192, // Inline files smaller than 8kb as base64
+              name: '[name].[hash].[ext]',
+              outputPath: 'images',
+            },
           },
         ],
       },
@@ -31,9 +35,12 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
-        }
+        },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   devServer: {
     static: {
