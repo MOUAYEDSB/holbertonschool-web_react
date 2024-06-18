@@ -14,8 +14,10 @@ describe('App Component', () => {
   let wrapper;
   const mockStore = configureStore([]);
   const initialState = fromJS({
-    isUserLoggedIn: false,
-    isNotificationDrawerVisible: false,
+    ui: {
+      isUserLoggedIn: false,
+      isNotificationDrawerVisible: false,
+    },
   });
   let store;
 
@@ -65,8 +67,10 @@ describe('App Component', () => {
     describe('when user is logged in', () => {
       beforeEach(() => {
         const loggedInState = fromJS({
-          isUserLoggedIn: true,
-          isNotificationDrawerVisible: false,
+          ui: {
+            isUserLoggedIn: true,
+            isNotificationDrawerVisible: false,
+          },
         });
         store = mockStore(loggedInState);
         wrapper = shallow(
@@ -95,7 +99,7 @@ describe('App Component', () => {
     it('should remove a notification from the list on markNotificationAsRead', () => {
       const initialNotifications = [
         { id: 1, type: 'default', value: 'New course available' },
-        { id: 2, type: 'urgent', value: 'New resume available' }
+        { id: 2, type: 'urgent', value: 'New resume available' },
       ];
       const wrapperInstance = shallow(
         <App
@@ -116,12 +120,13 @@ describe('App Component', () => {
     });
   });
 
-
   describe('mapStateToProps', () => {
     it('should return the correct isLoggedIn state', () => {
       const state = fromJS({
-        isUserLoggedIn: true,
-        isNotificationDrawerVisible: false,
+        ui: {
+          isUserLoggedIn: true,
+          isNotificationDrawerVisible: false,
+        },
       });
       const expectedProps = {
         isLoggedIn: true,
